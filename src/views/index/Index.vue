@@ -3,7 +3,7 @@
     <div class="summary">
       <div class="date">今日<small> {{today}}</small></div>
       <div class="ly">
-        <div class="lyi-f">支出: ￥<strong>34</strong> 元</div>
+        <div class="lyi-f mr-10rem">支出: ￥<strong>34</strong> 元</div>
         <div class="lyi-f">收入: ￥<strong>34</strong> 元</div>
       </div>
     </div>
