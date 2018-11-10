@@ -1,4 +1,4 @@
-## 记账本
+# 记账本
 数据不会被窃取的个人记账本。数据都存在本地，需要时，可以灵活导出。
 
 ## 功能
@@ -73,3 +73,18 @@
   }
 }
 ```
+
+## 运行
+1 安装依赖：  
+
+1. `npm install`
+
+推荐用[Yarn](https://yarnpkg.com/en/docs/install):
+1. 安装 [Yarn](https://yarnpkg.com/en/docs/install)。
+1. `yarn install`。
+
+2 启动 `npm run dev`
+
+## 构建
+1. `npm run build`
+1. 打开 `dist` 下的 `index.html` 来查看效果。
