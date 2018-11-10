@@ -56,7 +56,7 @@
 ]
 ```
 
-在 `dict.js` 的 `outType` 中查看全部。
+在 `dict.js` 的 `inType` 中查看全部。
 
 
 ## 收支数据
