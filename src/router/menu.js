@@ -11,13 +11,13 @@ var routes = [
     },
   },
   {
-    path: '/member-center',
+    path: '/statistics',
     meta: {
-      title: '个人中心',
+      title: '统计',
       activeTypeIndex: 3,
     },
     component: resolve => {
-      lazyLoading(resolve, 'member-center')
+      lazyLoading(resolve, 'statistics')
     },
   },
 ]
