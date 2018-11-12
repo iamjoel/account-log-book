@@ -15,7 +15,7 @@
         round
         @click="isShowOut=true"
         >
-          记一比支出
+          记一笔支出
         </van-button>
 
         <van-button
@@ -26,7 +26,7 @@
         plain
         @click="isShowIn=true"
         >
-          记一比收入
+          记一笔收入
         </van-button>
     </div>
     
@@ -37,20 +37,75 @@
         left-arrow
         @click-left="isShowOut=false"
       />
-      <div class="mt-10rem">
-        支出内容
-      </div>
+      <insert></insert>
+      <!-- <div class="m-10rem">
+        <van-row>
+           <van-col span="11">
+              <van-cell-group>
+                 <van-field
+                   v-model="payInput"
+                   placeholder="请选择支出类型"
+                   @click="pickerPayShow" />
+              </van-cell-group>
+             
+           </van-col>
+
+           <van-col span="10" offset="1">
+              <van-cell-group>
+                  <van-field
+                    v-model="payMoney"
+                    placeholder="请输入支出金额">
+                    <div slot="button">元</div>
+                  </van-field>
+              </van-cell-group>
+              
+           </van-col>
+        </van-row>
+
+        <van-row class="mt-20rem">
+           <van-col span="24">
+             <van-button size="large" type="primary" round @click="paySubmit">确认提交</van-button>
+           </van-col>
+        </van-row>
+      </div> -->
     </van-popup>
 
+    
     <van-popup v-model="isShowIn" position="top">
       <van-nav-bar
         left-text="返回"
         left-arrow
         @click-left="isShowIn=false"
       />
-      <div class="mt-10rem">
-        收入内容
-      </div>
+      <!-- <div class="m-10rem">
+        <van-row>
+           <van-col span="11">
+              <van-cell-group>
+                 <van-field
+                   v-model="inInput"
+                   placeholder="请选择收入类型"
+                   @click="pickerInShow" />
+              </van-cell-group>
+           </van-col>
+
+           <van-col span="10" offset="1">
+              <van-cell-group>
+                  <van-field
+                    v-model="inMoney"
+                    placeholder="请输入收入金额">
+                    <div slot="button">元</div>
+                  </van-field>
+              </van-cell-group>
+              
+           </van-col>
+        </van-row>
+
+        <van-row class="mt-20rem">
+           <van-col span="24">
+             <van-button size="large" type="primary" round @click="inSubmit">确认提交</van-button>
+           </van-col>
+        </van-row>
+      </div> -->
     </van-popup>
   </div>
 </template>

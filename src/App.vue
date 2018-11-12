@@ -1,12 +1,10 @@
 <template>
   <div id="app">
-
     <div class="main">
       <router-view></router-view>
     </div>
     <van-tabbar v-model="activeTypeIndex" v-show="$store.state.isShowFooter">
-      <van-tabbar-item icon="edit" url="#/">记一笔
-      </van-tabbar-item>
+      <van-tabbar-item icon="edit" url="#/">记一笔</van-tabbar-item>
       <van-tabbar-item icon="exchange-record" url="#/statistics">统计</van-tabbar-item>
       <van-tabbar-item icon="share" @click="$toast('开发中')">导出</van-tabbar-item>
     </van-tabbar>

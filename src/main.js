@@ -55,6 +55,12 @@ router.afterEach((to,from,next) => { // 进入新页面时，页面总是滚动�
 
 import App from './App.vue'
 
+// Vue.directive('focus', {
+//     inserted: function (el) {
+//         el.focus()
+//     },
+// });
+
 new Vue({
   el: '#app',
   router,
