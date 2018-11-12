@@ -1,11 +1,11 @@
 import moment from 'moment'
 
-import insert from '../../components/insert/insert'
+import InValue from '@/components/Insert'
 
 
 export default {
   components: {
-    insert
+    InValue
   },
   data() {
     return {

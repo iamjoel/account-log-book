@@ -37,7 +37,7 @@
         left-arrow
         @click-left="isShowOut=false"
       />
-      <insert></insert>
+      <in-value />
       <!-- <div class="m-10rem">
         <van-row>
            <van-col span="11">

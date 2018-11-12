@@ -33,6 +33,6 @@
   </div>
 </template>
 
-<script src="./insert.js"></script>
+<script src="./main.js"></script>
 
 <!-- <style scoped src="./style.css"></style> -->
