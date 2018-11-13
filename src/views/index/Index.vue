@@ -13,7 +13,7 @@
         type="primary"
         size="large"
         round
-        @click="isShowOut=true"
+        @click="popShow('outType')"
         >
           记一笔支出
         </van-button>
@@ -24,59 +24,29 @@
         size="large"
         round
         plain
-        @click="isShowIn=true"
+        @click="popShow('inType')"
         >
           记一笔收入
         </van-button>
     </div>
     
 
-    <van-popup v-model="isShowOut" position="top">
-      <van-nav-bar
-        left-text="返回"
-        left-arrow
-        @click-left="isShowOut=false"
-      />
-      <in-value />
-      <!-- <div class="m-10rem">
-        <van-row>
-           <van-col span="11">
-              <van-cell-group>
-                 <van-field
-                   v-model="payInput"
-                   placeholder="请选择支出类型"
-                   @click="pickerPayShow" />
-              </van-cell-group>
-             
-           </van-col>
-
-           <van-col span="10" offset="1">
-              <van-cell-group>
-                  <van-field
-                    v-model="payMoney"
-                    placeholder="请输入支出金额">
-                    <div slot="button">元</div>
-                  </van-field>
-              </van-cell-group>
-              
-           </van-col>
-        </van-row>
-
-        <van-row class="mt-20rem">
-           <van-col span="24">
-             <van-button size="large" type="primary" round @click="paySubmit">确认提交</van-button>
-           </van-col>
-        </van-row>
-      </div> -->
+    <van-popup v-model="isShow" position="top">
+       <van-nav-bar
+         left-text="返回"
+         left-arrow
+         @click-left="isShow=false"
+       />
+       <in-value :popType="popType" />
     </van-popup>
 
     
-    <van-popup v-model="isShowIn" position="top">
+    <!-- <van-popup v-model="isShowIn" position="top">
       <van-nav-bar
         left-text="返回"
         left-arrow
         @click-left="isShowIn=false"
-      />
+      /> -->
       <!-- <div class="m-10rem">
         <van-row>
            <van-col span="11">
@@ -106,7 +76,7 @@
            </van-col>
         </van-row>
       </div> -->
-    </van-popup>
+    <!-- </van-popup> -->
   </div>
 </template>
 

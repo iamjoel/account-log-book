@@ -1,7 +1,5 @@
 import moment from 'moment'
-
-import InValue from '@/components/Insert'
-
+import InValue from '@/components/insert/index.vue'
 
 export default {
   components: {
@@ -10,8 +8,8 @@ export default {
   data() {
     return {
       today: moment().format('YYYY年MM月DD日'),
-      isShowOut: false,
-      isShowIn: false,      
+      isShow: false,
+      popType: '',
     }  
   },
   
@@ -22,7 +20,12 @@ export default {
         this.$hideLoading()
       }, 2000)
     },
-    
+    popShow(arg) {
+      this.popType = arg
+      this.isShow = true
+      
+    },
+
     
   }
 }
