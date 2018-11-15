@@ -64,7 +64,7 @@
     '09': { // 月
       '10': [ //'日'
         {
-          type: 1, // 1: 支出, 2,收入
+          type: 'in', // out: 支出, in: 收入
           moneyClassifyId: 1, // 分类 id。
           moneyClassifyName: '早餐', // 分类名称，冗杂下。
           value: 10.5, // 金额
