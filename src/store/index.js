@@ -15,6 +15,9 @@ const state = {
   },
   isShowFooter: true,
   activeTypeIndex: 0,
+  dataList: [],
+  outMoney: 0,
+  inMoney: 0
 }
 
 export default new Vuex.Store({

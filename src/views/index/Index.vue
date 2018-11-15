@@ -3,8 +3,8 @@
     <div class="summary">
       <div class="date">今日<small> {{today}}</small></div>
       <div class="ly">
-        <div class="lyi-f mr-10rem">支出: ￥<strong>34</strong> 元</div>
-        <div class="lyi-f">收入: ￥<strong>34</strong> 元</div>
+        <div class="lyi-f mr-10rem">支出: ￥<strong>{{getTodayOut}}</strong> 元</div>
+        <div class="lyi-f">收入: ￥<strong>{{getTodayIn}}</strong> 元</div>
       </div>
     </div>
     <div class="ly ly-j">
@@ -13,7 +13,7 @@
         type="primary"
         size="large"
         round
-        @click="popShow('outType')"
+        @click="isShowOut=true"
         >
           记一笔支出
         </van-button>
@@ -24,59 +24,92 @@
         size="large"
         round
         plain
-        @click="popShow('inType')"
+        @click="isShowIn=true"
         >
           记一笔收入
         </van-button>
     </div>
     
-
-    <van-popup v-model="isShow" position="top">
+    <!-- 支出弹出 -->
+    <van-popup v-model="isShowOut" position="top">
        <van-nav-bar
          left-text="返回"
          left-arrow
-         @click-left="isShow=false"
+         @click-left="isShowOut=false"
        />
-       <in-value :popType="popType" />
+       <radio-button :inout-type="'1'" v-model="typeValue" />
+
+       <van-row class="m-20rem">
+         <van-col span="24">
+            <van-cell-group>
+                <van-field
+                  v-model="money"
+                  placeholder="请输入收入金额">
+                  <div slot="button">元</div>
+                </van-field>
+            </van-cell-group>
+         </van-col>
+      </van-row>
+
+      <van-row class="m-20rem">
+         <van-col span="24">
+            <van-cell-group>
+                <van-field
+                  v-model="comment"
+                  placeholder="请输入备注">
+                </van-field>
+            </van-cell-group>
+         </van-col>
+      </van-row>
+      
+      <van-row class="m-20rem">
+         <van-col span="24">
+           <van-button size="large" type="primary" round @click="outInSubmit(1)">确认提交</van-button>
+         </van-col>
+      </van-row>
+
     </van-popup>
 
-    
-    <!-- <van-popup v-model="isShowIn" position="top">
-      <van-nav-bar
-        left-text="返回"
-        left-arrow
-        @click-left="isShowIn=false"
-      /> -->
-      <!-- <div class="m-10rem">
-        <van-row>
-           <van-col span="11">
-              <van-cell-group>
-                 <van-field
-                   v-model="inInput"
-                   placeholder="请选择收入类型"
-                   @click="pickerInShow" />
-              </van-cell-group>
-           </van-col>
+    <!-- 收入弹出 -->
+    <van-popup v-model="isShowIn" position="top">
+       <van-nav-bar
+         left-text="返回"
+         left-arrow
+         @click-left="isShowIn=false"
+       />
+       <radio-button :inout-type="'2'" v-model="typeValue" />
 
-           <van-col span="10" offset="1">
-              <van-cell-group>
-                  <van-field
-                    v-model="inMoney"
-                    placeholder="请输入收入金额">
-                    <div slot="button">元</div>
-                  </van-field>
-              </van-cell-group>
-              
-           </van-col>
-        </van-row>
+       <van-row class="m-20rem">
+         <van-col span="24">
+            <van-cell-group>
+                <van-field
+                  v-model="money"
+                  placeholder="请输入收入金额">
+                  <div slot="button">元</div>
+                </van-field>
+            </van-cell-group>
+         </van-col>
+      </van-row>
+      
+      <van-row class="m-20rem">
+         <van-col span="24">
+            <van-cell-group>
+                <van-field
+                  v-model="comment"
+                  placeholder="请输入备注">
+                </van-field>
+            </van-cell-group>
+         </van-col>
+      </van-row>
 
-        <van-row class="mt-20rem">
-           <van-col span="24">
-             <van-button size="large" type="primary" round @click="inSubmit">确认提交</van-button>
-           </van-col>
-        </van-row>
-      </div> -->
-    <!-- </van-popup> -->
+      <van-row class="m-20rem">
+         <van-col span="24">
+           <van-button size="large" type="primary" round @click="outInSubmit(2)">确认提交</van-button>
+         </van-col>
+      </van-row>
+
+    </van-popup>
+
   </div>
 </template>
 
