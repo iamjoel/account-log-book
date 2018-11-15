@@ -26,13 +26,43 @@ export default {
   },
   computed: {
     outValue () {
-      return 0
+      return this.getTodayValue('out')
     },
     inValue () {
-      return 0
+      return this.getTodayValue('in')
     }
   },
   methods: {
+    getTodayData() {
+      var log = this.$store.state.log
+
+      const year = today.year()
+      const month = today.month() + 1
+      const day = today.date()
+
+      if(log && log[year] && log[year][month] && log[year][month][day]) {
+        return log[year][month][day]
+      } else {
+        return false
+      }
+    },
+    getTodayValue(type) {
+      var todayData = this.getTodayData()
+      if (!todayData) {
+        return 0
+      }
+
+      var res = 0
+      todayData
+        .filter(item => item.type === type)
+        .forEach(item => {
+          var value = parseFloat(item.value)
+          if(!isNaN(value)) {
+            res += value
+          }
+        })
+      return res
+    },
     show(type) {
       this.curr = { // 重置之前的
         ...logItemTemplate,
@@ -66,5 +96,6 @@ export default {
         this.isShowOut = false
       }
     },
+
   }
 }

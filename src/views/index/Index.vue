@@ -61,7 +61,7 @@
          <van-col span="24">
             <van-cell-group>
                 <van-field
-                  v-model="curr.comment"
+                  v-model.number="curr.comment"
                   placeholder="请输入备注">
                 </van-field>
             </van-cell-group>
@@ -94,7 +94,7 @@
          <van-col span="24">
             <van-cell-group>
                 <van-field
-                  v-model="curr.money"
+                  v-model.number="curr.value"
                   placeholder="请输入收入金额">
                   <div slot="button">元</div>
                 </van-field>
