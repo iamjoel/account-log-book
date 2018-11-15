@@ -26,7 +26,7 @@ export default {
   },
   computed: {
     outValue () {
-      return 0
+      return this.$store.state.outMoney
     },
     inValue () {
       return 0
@@ -38,7 +38,7 @@ export default {
         ...logItemTemplate,
         type
       }
-
+      
       if(type === 'in') {
         this.isShowIn = true
       } else {
@@ -55,7 +55,14 @@ export default {
       })
     },
     save() {
-      // this.$store.commit('saveData', this.datas)
+      console.log(this.curr)
+      this.$store.commit('saveData', this.curr)
+      if(this.curr.type === 'in') {
+        this.isShowIn = false
+      } else {
+        this.isShowOut = false
+      }
+      
     },
   }
 }

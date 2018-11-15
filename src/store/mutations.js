@@ -30,15 +30,16 @@ const mutations = {
              }
           }
       }
-      console.log(datas)
-      if(arg.type == 1) {
+      
+      if(arg.type == 'out') {
          state.outMoney += parseInt(arg.value)
-      }else if(arg.type == 1) {
+         console.log(state.outMoney)
+      }else if(arg.type == 'in') {
          state.inMoney += parseInt(arg.value)
       }
 
       list.unshift(datas)
-
+      
       state.dataList = list
       localStorage.setItem("list", JSON.stringify(list))
       

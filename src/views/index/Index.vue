@@ -1,6 +1,6 @@
 <template>
   <div class="main p-20rem">
-    {{curr}}
+    <!-- {{curr}} -->
     <div class="summary">
       <div class="date">今日<small> {{today | time('YYYY年MM月DD日')}}</small></div>
       <div class="ly">
