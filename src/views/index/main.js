@@ -26,7 +26,7 @@ export default {
   },
   computed: {
     outValue () {
-      return this.$store.state.outMoney
+      return 0
     },
     inValue () {
       return 0
@@ -55,14 +55,16 @@ export default {
       })
     },
     save() {
-      console.log(this.curr)
-      this.$store.commit('saveData', this.curr)
+      this.$store.commit('addItem', {
+        date: today,
+        payload: {...this.curr}
+      })
+
       if(this.curr.type === 'in') {
         this.isShowIn = false
       } else {
         this.isShowOut = false
       }
-      
     },
   }
 }

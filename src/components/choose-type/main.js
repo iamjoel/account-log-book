@@ -17,7 +17,6 @@ export default {
   methods: {
     select(type) {
       this.selectedType = type
-      
       this.$emit('input', type)
     },
     reset() {

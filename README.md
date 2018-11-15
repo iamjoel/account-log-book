@@ -65,8 +65,10 @@
       '10': [ //'日'
         {
           type: 'in', // out: 支出, in: 收入
-          moneyClassifyId: 1, // 分类 id。
-          moneyClassifyName: '早餐', // 分类名称，冗杂下。
+          classify: {
+            id: 1, // 分类 id。
+            name: '早餐', // 分类名称，冗杂下。
+          },
           value: 10.5, // 金额
           comment: '1碗粥，1个鸡蛋'
         },
