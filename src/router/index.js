@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import menu from './menu'
-// import com from './component'
 
 Vue.use(Router)
 

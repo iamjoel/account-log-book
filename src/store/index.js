@@ -9,6 +9,8 @@ Vue.use(Vuex)
 const debug = process.env.NODE_ENV !== 'production'
 
 const state = {
+  isShowFooter: true,
+  activeTypeIndex: 0,
   log: localStorage.getItem('log') ? JSON.parse(localStorage.getItem('log')) : {}
 }
 

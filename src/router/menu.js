@@ -3,7 +3,7 @@ var routes = [
   {
     path: '/',
     meta: {
-      title: '首页',
+      title: '记一笔',
       activeTypeIndex: 0,
     },
     component: resolve => {
@@ -14,7 +14,7 @@ var routes = [
     path: '/statistics',
     meta: {
       title: '统计',
-      activeTypeIndex: 3,
+      activeTypeIndex: 1,
     },
     component: resolve => {
       lazyLoading(resolve, 'statistics')

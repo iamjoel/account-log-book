@@ -65,63 +65,11 @@ export default {
       if(meta.activeTypeIndex !== undefined) {
         this.$store.dispatch('changeActiveType', parseInt(meta.activeTypeIndex, 10))
       }
-    },
-    fetchUserInfo(openid) {
-      return this.$http.get(`${urls.wechat.userInfo}/${openid}`)
-    },
-    fetchOpenId(code) {
-      if(!code) { // 本地没有 code
-        return new Promise((resolve, reject) => {
-          reject()
-        })
-      } else {
-        return new Promise((resolve, reject) => {
-          this.$http.get(urls.wechat.getOpenid + '/' + code).then(({data})=> {
-            resolve(data.data)
-          }, ()=> {
-            reject()
-          })
-        })
-      }
-    }
-  },
-  created() {
-    return
-    this.$showLoading()
-    var queryObject = getQueryObject()
-    var code = queryObject.code
-    if(code) {
-      // 微信是 redirectUrl 上不支持 hash。
-      if(queryObject.state && queryObject.state != 'STATE') {
-        this.$router.push(queryObject.state)
-      }
-      this.fetchOpenId(code).then((data) => { // 把用户信息也返回了
-        vm.$store.commit(types.OPENID, data.openid)
-        vm.$store.commit(types.USER_INFO, data)
-        vm.$hideLoading()
-      }, )
-    } else { // 测试环境
-      var openid = 'ozNc2xHa3VosLO9zsnsg31axOa2o' // 测试
-      vm.$store.commit(types.OPENID, openid)
-      vm.fetchUserInfo(openid)
     }
   }
 };
 
-function getQueryObject(url) {
-    url = url == null ? window.location.href : url;
-    var search = url.substring(url.lastIndexOf("?") + 1);
-    var obj = {};
-    var reg = /([^?&=]+)=([^?&=]*)/g;
-    search.replace(reg, function (rs, $1, $2) {
-        var name = decodeURIComponent($1);
-        var val = decodeURIComponent($2);
-        val = String(val);
-        obj[name] = val;
-        return rs;
-    });
-    return obj;
-}
+
 </script>
 <style src="@/assets/vendor/reset.css"></style>
 <style src="css-utils-collection"></style>
