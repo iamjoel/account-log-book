@@ -3,24 +3,28 @@ import checkRate from '../../assets/utils/checkRate.js'
 
 export default {
   props: {
-    type: String
+    type: String,
+    value: Object
   },
   data() {
     return {
       typeList: [],
-      selectedType: {}
+      selectedType: {id: 5}
     }
   },
   mounted() {
     this.typeList = this.type === 'in' ? inType : outType
+    if(this.value) {
+      this.selectedType = {...this.value}
+    }
   },
   methods: {
     select(type) {
       this.selectedType = type
       this.$emit('input', type)
     },
-    reset() {
-      this.selectedType = {}
+    update(value) {
+      this.selectedType = value
     }
   }
 }

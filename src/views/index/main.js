@@ -1,5 +1,6 @@
 import moment from 'moment'
 import ChooseType from '@/components/choose-type/'
+import {inType, outType} from '../../dict.js'
 
 var logItemTemplate = { // 每一笔记录的模板
   type: null,
@@ -67,7 +68,8 @@ export default {
     show(type) {
       this.curr = { // 重置之前的
         ...logItemTemplate,
-        type
+        type,
+        classify: type === 'in' ? inType[0] : outType[0] // 默认选中第一个
       }
       
       if(type === 'in') {
@@ -76,16 +78,31 @@ export default {
         this.isShowOut = true
       }
 
-      // 重置组件的状态
+      // 设置组件的初始化状态
       this.$nextTick(() => {
         if(type === 'in') {
-          this.$refs.chooseInType.reset()
+          this.$refs.chooseInType.update(this.curr.classify)
         } else {
-          this.$refs.chooseOutType.reset()
+          this.$refs.chooseOutType.update(this.curr.classify)
         }
       })
     },
+    valid(item) {
+      var errMsg = null
+      if(!item.value) {
+        errMsg = '请输入金额'
+      }
+      if(errMsg) {
+        this.$toast(errMsg)
+        return false
+      } else {
+        return true
+      }
+    },
     save() {
+      if(!this.valid(this.curr)) {
+        return
+      }
       this.$store.commit('addItem', {
         date: today,
         payload: {...this.curr}

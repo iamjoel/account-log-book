@@ -1,8 +1,7 @@
 <template>
   <div class="insert m-10rem" border="false">
-    <h2 class="title">常用类别</h2>
     <van-row class="types">
-      <van-col span="6" v-for="item in typeList" :key="item.id">
+      <van-col span="8" v-for="item in typeList" :key="item.id">
         <van-button 
           size="small"
           class="btn"
