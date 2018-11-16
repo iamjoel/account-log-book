@@ -9,6 +9,9 @@ var logItemTemplate = { // 每一笔记录的模板
 }
 
 const today = moment()
+const year = today.year()
+const month = today.month() + 1
+const day = today.date()
 
 export default {
   components: {
@@ -19,26 +22,20 @@ export default {
       today,
       isShowOut: false,
       isShowIn: false,
+      outValue: 0,
+      inValue: 0,
       curr: { // 当前记录的这笔
         ...logItemTemplate
       },
     }
   },
-  computed: {
-    outValue () {
-      return this.getTodayValue('out')
-    },
-    inValue () {
-      return this.getTodayValue('in')
-    }
+  mounted() {
+    this.$store.commit('initTodayItem')
+    this.updateTodayValue()
   },
   methods: {
     getTodayData() {
       var log = this.$store.state.log
-
-      const year = today.year()
-      const month = today.month() + 1
-      const day = today.date()
 
       if(log && log[year] && log[year][month] && log[year][month][day]) {
         return log[year][month][day]
@@ -62,6 +59,10 @@ export default {
           }
         })
       return res
+    },
+    updateTodayValue() {
+      this.outValue = this.getTodayValue('out')
+      this.inValue = this.getTodayValue('in')
     },
     show(type) {
       this.curr = { // 重置之前的
@@ -89,6 +90,7 @@ export default {
         date: today,
         payload: {...this.curr}
       })
+      this.updateTodayValue()
 
       if(this.curr.type === 'in') {
         this.isShowIn = false
