@@ -70,9 +70,10 @@
           </van-field>
       </div>
       
-      <van-row class="m-20rem">
-        <van-button size="large" type="primary" round @click="save">确认提交</van-button>
-      </van-row>
+      <div class="m-20 ly">
+        <van-button size="large"  round @click="isShowOut=false" class="mr-10rem">取消</van-button>
+        <van-button size="large" type="primary" round @click="save">保存</van-button>
+      </div>
     </van-popup>
 
     <!-- 收入弹出 -->
@@ -115,10 +116,10 @@
           </van-field>
       </div>
       
-      <van-row class="m-20rem">
-        <van-button size="large" type="primary" round @click="save">确认提交</van-button>
-      </van-row>
-
+      <div class="m-20 ly">
+        <van-button size="large"  round @click="isShowIn=false" class="mr-10rem">取消</van-button>
+        <van-button size="large" type="primary" round @click="save">保存</van-button>
+      </div>
     </van-popup>
 
   </div>
