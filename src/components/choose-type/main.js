@@ -15,6 +15,7 @@ export default {
   mounted() {
     this.typeList = this.type === 'in' ? inType : outType
     if(this.value) {
+      console.log(this.value)
       this.selectedType = {...this.value}
     }
   },

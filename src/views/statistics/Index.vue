@@ -8,19 +8,19 @@
       />
     </van-cell-group>
 
-    <van-tabs type="card" class="mt-20rem">
+    <van-tabs type="card" class="mt-20rem" color="#67b836">
       <van-tab title="概览" >
         <van-cell-group>
-          <van-cell title="盈余" value="+200"/>
+          <van-cell title="盈余" :value="surplus"/>
           <van-cell 
             title="支出" 
-            :value="400" 
+            :value="outMonthValue" 
             is-link
             @click="isShowOut = true"
           />
           <van-cell 
             title="收入" 
-            :value="600" 
+            :value="inMonthValue" 
             is-link
             @click="isShowIn = true"
           />
@@ -32,6 +32,10 @@
         </div>
         <div class="mt-10rem">
           收入支出折线图
+          <div>
+              <!-- <canvas id="outInChart" ref="chart" width="80%" height="260"></canvas> -->
+              <f2-line :charData="serverData" :id="'c1'"></f2-line>
+          </div>
         </div>
       </van-tab>
     </van-tabs>
