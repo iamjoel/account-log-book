@@ -14,18 +14,6 @@ Vue.use(Lazyload, {
   // error: '' // 加载完成的图片样式
 })
 
-import {IMGS_PREFIX} from '@/setting'
-Vue.prototype.$imgPrefix = IMGS_PREFIX
-Vue.prototype.$preview = url => {
-  if(typeof url !== 'string' ) {
-    return
-  }
-  if(!/^http/.test(url.trim())) {
-    url = `${IMGS_PREFIX}/${url}`
-  }
-  ImagePreview([url])
-}
-
 Vue.prototype.$showLoading = () => {
   Toast.loading({
     duration: 0,       // 持续展示 toast
@@ -39,6 +27,7 @@ Vue.prototype.$showLoading = () => {
 Vue.prototype.$hideLoading = () => {
   Toast.clear()
 }
+
 
 import axios from 'axios'
 require('@/service/interceptor') // axios 拦截器，做通用报错等
