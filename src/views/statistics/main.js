@@ -8,18 +8,8 @@ var Group = G.Group
 
 import {getPlainMonthData, getMonthValue} from '@/assets/utils/log-data-utils'
 
-const ym = moment()
-const year = ym.year()
-const month = ym.month() + 1
-const day = ym.date()
-
-var curMonthDay = []
-for(let i = 1; i < (day + 1); i++) {
-  curMonthDay.push(i)
-}
 
 export default {
-  
   data() {
     return {
       isShowOut: false,
@@ -48,6 +38,11 @@ export default {
     this.updateSummary() // 收入，支出的概览
   },
   methods: {
+    dataViewChange(index, tabName) {
+      if(tabName === '每日详情') {
+        this.renderDailyChart()
+      }
+    },
     showClassifyType(type) {
       if(type === 'in') {
         this.isShowIn = true
@@ -193,7 +188,101 @@ export default {
           }
         })
         chart.render();
+      })
+    },
+    // 每天的折线图
+    renderDailyChart() {
+      var vm = this
+      var data = []
+      var preStr = `${this.activeDate.year()}-${this.activeDate.month() + 1}\/`
+      var activeDaysInMonth = this.activeDate.daysInMonth()
+      for (var day = 1; day <= activeDaysInMonth; day++) {
+        data[day] = {
+          time: preStr + (day < 10 ? `0${day}` : `${day}`),
+          value: getDayTotalValue(day, 'in'),
+          type: '收入'
+        }
+        data[day + activeDaysInMonth] = {
+          time: preStr + (day < 10 ? `0${day}` : `${day}`),
+          value: getDayTotalValue(day, 'out'),
+          type: '支出'
+        }
+      }
+      
+      function getDayTotalValue(day, type) {
+        var total = 0
+        vm.activeMonthPlainData
+          .filter(item => item.day == day)
+          .forEach(item => {
+            if(item.type === type) {
+              total += item.value
+            }
+          })
+        return total
+      }
 
+      data.shift()
+      
+      // debugger
+      
+
+      this.$nextTick(() => {
+        this.$nextTick(() => {
+          var chart = new F2.Chart({
+            id: 'detail-chart',
+            pixelRatio: window.devicePixelRatio
+          });
+          chart.source(data, {
+            time: {
+              type: 'timeCat',
+              tickCount: 3,
+              mask: 'hh:mm',
+              range: [0, 1]
+            },
+            value: {
+              tickCount: 3,
+              formatter: function formatter(ivalue) {
+                return ivalue + '%';
+              }
+            }
+          });
+          chart.axis('time', {
+            line: null,
+            label: function label(text, index, total) {
+              var textCfg = {};
+              if (index === 0) {
+                textCfg.textAlign = 'left';
+              } else if (index === total - 1) {
+                textCfg.textAlign = 'right';
+              }
+              return textCfg;
+            }
+          });
+          chart.axis('tem', {
+            grid: function grid(text) {
+              if (text === '0%') {
+                return {
+                  lineDash: null,
+                  lineWidth: 1
+                };
+              }
+            }
+          });
+          chart.legend({
+            position: 'bottom',
+            offsetY: -5
+          });
+          chart.line().position('time*value').color('type').shape('type', function(type) {
+            if (type === '预期收益率') {
+              return 'line';
+            }
+            if (type === '实际收益率') {
+              return 'dash';
+            }
+          });
+
+          chart.render();
+        })
       })
     },
     updateSummary() {

@@ -4,6 +4,10 @@
   overflow-y: auto;
 }
 
+.chart-wrapper {
+  margin-top: .1rem;
+}
+
 .chart-wrapper canvas{
   display: block;
   width: 100%;
