@@ -194,7 +194,7 @@ export default {
     renderDailyChart() {
       var vm = this
       var data = []
-      var preStr = `${this.activeDate.year()}-${this.activeDate.month() + 1}\/`
+      var preStr = `${this.activeDate.year()}/${this.activeDate.month() + 1}\/`
       var activeDaysInMonth = this.activeDate.daysInMonth()
       for (var day = 1; day <= activeDaysInMonth; day++) {
         data[day] = {
@@ -221,13 +221,10 @@ export default {
         return total
       }
 
-      data.shift()
+      data.shift() // 去掉第一条空的
       
-      // debugger
-      
-
       this.$nextTick(() => {
-        this.$nextTick(() => {
+        this.$nextTick(() => { // tab 内容的变化，是两次
           var chart = new F2.Chart({
             id: 'detail-chart',
             pixelRatio: window.devicePixelRatio
@@ -235,14 +232,14 @@ export default {
           chart.source(data, {
             time: {
               type: 'timeCat',
-              tickCount: 3,
-              mask: 'hh:mm',
+              // tickCount: 3,
+              mask: 'D',
               range: [0, 1]
             },
             value: {
-              tickCount: 3,
+              // tickCount: 3,
               formatter: function formatter(ivalue) {
-                return ivalue + '%';
+                return ivalue
               }
             }
           });
@@ -272,11 +269,21 @@ export default {
             position: 'bottom',
             offsetY: -5
           });
+          chart.tooltip({
+            showCrosshairs: true,
+            showItemMarker: false,
+            onShow: function onShow(ev) {
+              var items = ev.items;
+              items[0].name = `${items[0].origin.time} ${items[0].name}`
+              items[0].value = `${items[0].value}元`
+              items[1].value = `${items[1].value}元`
+            }
+          })
           chart.line().position('time*value').color('type').shape('type', function(type) {
-            if (type === '预期收益率') {
+            if (type === '支出') {
               return 'line';
             }
-            if (type === '实际收益率') {
+            if (type === '收入') {
               return 'dash';
             }
           });
