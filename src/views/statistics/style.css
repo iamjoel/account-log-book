@@ -3,3 +3,9 @@
   min-height: 100vh;
   overflow-y: auto;
 }
+
+.chart-wrapper canvas{
+  display: block;
+  width: 100%;
+  height: 4rem;
+}

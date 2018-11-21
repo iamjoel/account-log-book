@@ -11,18 +11,18 @@
     <van-tabs type="card" class="mt-20rem" color="#67b836">
       <van-tab title="概览" >
         <van-cell-group>
-          <van-cell title="盈余" :value="surplus"/>
+          <van-cell title="盈余" :value="surplus + '元'"/>
           <van-cell 
             title="支出" 
-            :value="outMonthValue" 
+            :value="outMonthValue + '元'" 
             is-link
-            @click="isShowOut = true"
+            @click="showClassifyType('out')"
           />
           <van-cell 
             title="收入" 
-            :value="inMonthValue" 
+            :value="inMonthValue + '元'" 
             is-link
-            @click="isShowIn = true"
+            @click="showClassifyType('in')"
           />
         </van-cell-group>
       </van-tab>
@@ -34,7 +34,7 @@
           收入支出折线图
           <div>
               <!-- <canvas id="outInChart" ref="chart" width="80%" height="260"></canvas> -->
-              <f2-line :charData="serverData" :id="'c1'"></f2-line>
+              <!-- <f2-line :charData="serverData" :id="'c1'"></f2-line> -->
           </div>
         </div>
       </van-tab>
@@ -43,12 +43,12 @@
     <van-popup v-model="isShowOut" position="right">
       <div class="full">
         <van-nav-bar
-          left-text="返回"
           left-arrow
+          title="支出"
           @click-left="isShowOut=false"
         />
-        <div class="mt-10rem">
-          支出饼状图
+        <div class="chart-wrapper mt-10rem">
+          <canvas id="out-classify-chart"></canvas>
         </div>
       </div>
     </van-popup>
@@ -56,12 +56,12 @@
     <van-popup v-model="isShowIn" position="right">
       <div class="full">
         <van-nav-bar
-          left-text="返回"
           left-arrow
+          title="收入"
           @click-left="isShowIn=false"
         />
-        <div class="mt-10rem">
-          收入饼状图
+        <div class="chart-wrapper mt-10rem">
+          <canvas id="in-classify-chart"></canvas>
         </div>
       </div>
     </van-popup>

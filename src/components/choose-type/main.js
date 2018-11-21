@@ -1,5 +1,4 @@
-import {inType, outType} from '../../dict.js'
-import checkRate from '../../assets/utils/checkRate.js'
+import {inType, outType} from '@/dict.js'
 
 export default {
   props: {
