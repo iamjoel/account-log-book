@@ -12,12 +12,15 @@ import {getPlainMonthData, getMonthValue} from '@/assets/utils/log-data-utils'
 export default {
   data() {
     return {
+      isShowSelectTime: false,
       isShowOut: false,
       isShowIn: false,
       currDate: moment(),
       prevMonthDate: moment().add('month', -1),
       activeDate: moment(), // 当前统计是时间
+      activeDateLabel: '本月',
       activeMonthPlainData: [],
+      activeDataViewIndex: 0,
       outMonthValue: 0,
       inMonthValue: 0,
       everydayOutValue: [],
@@ -38,6 +41,16 @@ export default {
     this.updateSummary() // 收入，支出的概览
   },
   methods: {
+    selectTimeChange(value, index) {
+      this.activeDate = index === 0 ? this.currDate : this.prevMonthDate
+      this.activeDateLabel = index === 0 ? '本月' : '上月'
+
+      this.updateSummary()
+      if(this.activeDataViewIndex === 1) {
+        this.renderDailyChart()
+      }
+      this.isShowSelectTime = false
+    },
     dataViewChange(index, tabName) {
       if(tabName === '每日详情') {
         this.renderDailyChart()
