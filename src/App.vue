@@ -6,7 +6,7 @@
     <van-tabbar v-model="activeTypeIndex" v-show="$store.state.isShowFooter">
       <van-tabbar-item icon="edit" url="#/">记一笔</van-tabbar-item>
       <van-tabbar-item icon="exchange-record" url="#/statistics">统计</van-tabbar-item>
-      <van-tabbar-item icon="share" @click="_export">导出</van-tabbar-item>
+      <van-tabbar-item icon="share" @click="exportData">导出</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
@@ -20,8 +20,8 @@ export default {
   name: 'app',
   data() {
     return {
-      data: [
-        ["日期", "收入或支出的类型", "类型", "金额", "备注"],      
+      allLogData: [
+        
       ],
     }
   },
@@ -47,7 +47,6 @@ export default {
     }
   },
   mounted() {
-    this.getLogData()
     this.pathChange()
   },
   methods: {
@@ -71,44 +70,61 @@ export default {
         this.$store.dispatch('changeActiveType', parseInt(meta.activeTypeIndex, 10))
       }
     },
-    getLogData() {
-       let dataArrays = []
-       let logData = this.$store.state.log
-
-       if(logData) {
-           for(let year in logData) {
-              for(let month in logData[year]) {
-                 for(let day in logData[year][month]) {
-                    let date = year + '-' + month + '-' + day
-                    let type, classify, value, comment, oneArray;
-                    
-                    logData[year][month][day]
-                       .forEach(item => {
-                          type = item.type
-                          classify = item.classify.name
-                          value = item.value
-                          comment = item.comment
-                          oneArray = [date, type, classify, value, comment]
-    
-                          dataArrays.push(oneArray)
-                       })    
-                 }
-              }
-           }
-       }
-       this.data.push(...dataArrays)
-    },
-    
-    _export(evt) {
-      const ws = XLSX.utils.aoa_to_sheet(this.data);
+    exportData() {
       const wb = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws, "SheetJS");
-      XLSX.writeFile(wb, "个人帐单.xlsx");
-    },
-    
-  }
-};
+      let logData = this.$store.state.log
 
+      if(logData) {
+        for(let year in logData) {
+          for(let month in logData[year]) {
+            let monthData = []
+            let sheetName = `${year}年${padZero(month)}月`
+            var total = 0
+            var inTotal = 0
+            var outTotal = 0
+            for(let day in logData[year][month]) {
+              logData[year][month][day].forEach(item => {
+                let value
+                if(item.type === 'in') {
+                  value = `+${item.value}`
+                  total += item.value
+                  inTotal += item.value
+                } else {
+                  value = `-${item.value}`
+                  total -= item.value
+                  outTotal += item.value
+                }
+                monthData.push([
+                  padZero(day),
+                  value,
+                  item.classify.name,
+                  item.comment
+                ])
+              })
+            }
+            
+            const ws = XLSX.utils.aoa_to_sheet([
+                ['盈余', total],
+                ['支出', outTotal],
+                ['收入', inTotal],
+                [],// 空行
+                ["日期", "金额", "费用类型",  "备注"],
+                ...monthData,
+            ]);
+
+            XLSX.utils.book_append_sheet(wb, ws, sheetName);
+          }
+        }
+      }
+      XLSX.writeFile(wb, "个人帐单.xlsx");
+      
+    },
+  }
+}
+
+function padZero(number) {
+  return parseInt(number, 10) < 10 ? ('0' + number) : number
+}
 
 </script>
 <style src="@/assets/vendor/reset.css"></style>
