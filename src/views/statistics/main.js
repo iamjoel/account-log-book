@@ -8,7 +8,6 @@ var Group = G.Group
 
 import {getPlainMonthData, getMonthValue} from '@/assets/utils/log-data-utils'
 
-
 export default {
   data() {
     return {
@@ -21,11 +20,9 @@ export default {
       activeDateLabel: '本月',
       activeMonthPlainData: [],
       activeDataViewIndex: 0,
+      isShowDetail: true,
       outMonthValue: 0,
       inMonthValue: 0,
-      everydayOutValue: [],
-      everydayInValue: [],
-      serverData: []
     }
   },
   computed: {
@@ -41,6 +38,9 @@ export default {
     this.updateSummary() // 收入，支出的概览
   },
   methods: {
+    padZero(num) {
+      return parseInt(num, 10) < 10 ? `0${num}` : num
+    },
     selectTimeChange(value, index) {
       this.activeDate = index === 0 ? this.currDate : this.prevMonthDate
       this.activeDateLabel = index === 0 ? '本月' : '上月'
