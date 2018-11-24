@@ -3,13 +3,19 @@
     <div class="summary">
       <div class="date">今日<small> {{today | time('YYYY年MM月DD日')}}</small></div>
       <div class="ly">
-        <div class="lyi-f mr-10rem">支出: ￥<strong>{{outValue}}</strong> 元</div>
-        <div class="lyi-f">收入: ￥<strong>{{inValue}}</strong> 元</div>
+        <div class="lyi-f ly ly-j ly-m mr-20rem">
+          <span>支出:</span> 
+          <span class="ly ly-m">￥<strong>{{outValue}}</strong> 元</span>
+        </div>
+        <div class="lyi-f ly ly-j ly-m">
+          <span>收入:</span>
+          <span class="ly ly-m">￥<strong>{{inValue}}</strong> 元</span>
+        </div>
       </div>
     </div>
-    <div class="ly ly-j">
+    <div class="ly ly-j mt-10rem">
       <van-button
-        class="mb-10rem mr-10rem"
+        class="mb-10rem mr-20rem op-btn"
         type="primary"
         size="large"
         round
@@ -19,7 +25,7 @@
       </van-button>
 
       <van-button
-        class="mb-10rem mr-10rem"
+        class="mb-10rem op-btn"
         type="primary"
         size="large"
         round
@@ -33,7 +39,6 @@
     <!-- 支出弹出 -->
     <van-popup v-model="isShowOut" position="top">
       <van-nav-bar
-        left-text="返回"
         title="记一笔支出"
         left-arrow
         @click-left="isShowOut=false"
@@ -79,7 +84,6 @@
     <!-- 收入弹出 -->
     <van-popup v-model="isShowIn" position="top">
       <van-nav-bar
-        left-text="返回"
         title="记一笔收入"
         left-arrow
         @click-left="isShowIn=false"

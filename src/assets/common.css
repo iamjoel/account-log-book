@@ -69,3 +69,13 @@ body.no-foot-tabbar {
   text-align: center;
 }
 
+/* 修改 vant 的皮肤 */
+.van-tabbar-item--active {
+  color: #4b0;
+}
+/*返回按钮*/
+.van-icon-arrow::before {
+  color: #333;
+  font-weight: bold;
+}
+
