@@ -41,7 +41,7 @@ const mutations = {
   },
   clearData(state) {
     state.log = {}
-    localStorage.setItem('log', {}) // 同步
+    localStorage.setItem('log', JSON.stringify({})) // 同步
   }
 }
 
