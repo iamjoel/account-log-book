@@ -38,6 +38,10 @@ const mutations = {
 
     log[year][month][day].push(payload)
     localStorage.setItem('log', JSON.stringify(log)) // 同步
+  },
+  clearData(state) {
+    state.log = {}
+    localStorage.setItem('log', {}) // 同步
   }
 }
 

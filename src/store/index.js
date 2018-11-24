@@ -10,30 +10,30 @@ const debug = process.env.NODE_ENV !== 'production'
 
 import {inType, outType} from '@/dict.js'
 // 测试数据
-var logData = {
-  2018: {
-    10: {// 上月的数据
-      1: [makeMockLogItemData('in'),makeMockLogItemData('out'),makeMockLogItemData('out'),],
-      2: [makeMockLogItemData('out'),makeMockLogItemData('out'),],
-      4: [makeMockLogItemData('in'),makeMockLogItemData('out'),makeMockLogItemData('out'),],
-      10: [makeMockLogItemData('in'),makeMockLogItemData('out'),makeMockLogItemData('out'),],
-      29: [makeMockLogItemData('in'),makeMockLogItemData('out'),makeMockLogItemData('out'),],
-    },
-    11: {// 本月的数据
-      1: [makeMockLogItemData('in'),makeMockLogItemData('out'),makeMockLogItemData('out'),],
-      2: [makeMockLogItemData('out'),makeMockLogItemData('out'),],
-      3: [makeMockLogItemData('in'),makeMockLogItemData('out'),makeMockLogItemData('out'),],
-      4: [makeMockLogItemData('in'),makeMockLogItemData('out'),makeMockLogItemData('out'),],
-      20: [makeMockLogItemData('in'),makeMockLogItemData('out'),makeMockLogItemData('out'),],
-    }
-  },
-}
+// var logData = {
+//   2018: {
+//     10: {// 上月的数据
+//       1: [makeMockLogItemData('in'),makeMockLogItemData('out'),makeMockLogItemData('out'),],
+//       2: [makeMockLogItemData('out'),makeMockLogItemData('out'),],
+//       4: [makeMockLogItemData('in'),makeMockLogItemData('out'),makeMockLogItemData('out'),],
+//       10: [makeMockLogItemData('in'),makeMockLogItemData('out'),makeMockLogItemData('out'),],
+//       29: [makeMockLogItemData('in'),makeMockLogItemData('out'),makeMockLogItemData('out'),],
+//     },
+//     11: {// 本月的数据
+//       1: [makeMockLogItemData('in'),makeMockLogItemData('out'),makeMockLogItemData('out'),],
+//       2: [makeMockLogItemData('out'),makeMockLogItemData('out'),],
+//       3: [makeMockLogItemData('in'),makeMockLogItemData('out'),makeMockLogItemData('out'),],
+//       4: [makeMockLogItemData('in'),makeMockLogItemData('out'),makeMockLogItemData('out'),],
+//       20: [makeMockLogItemData('in'),makeMockLogItemData('out'),makeMockLogItemData('out'),],
+//     }
+//   },
+// }
 
 const state = {
   isShowFooter: true,
   activeTypeIndex: 0,
-  log: logData
-  // log: localStorage.getItem('log') ? JSON.parse(localStorage.getItem('log')) : {}
+  // log: logData
+  log: localStorage.getItem('log') ? JSON.parse(localStorage.getItem('log')) : {}
 }
 
 export default new Vuex.Store({

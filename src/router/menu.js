@@ -20,6 +20,16 @@ var routes = [
       lazyLoading(resolve, 'statistics')
     },
   },
+  {
+    path: '/data-center',
+    meta: {
+      title: '数据中心',
+      activeTypeIndex: 2,
+    },
+    component: resolve => {
+      lazyLoading(resolve, 'data-center')
+    },
+  },
 ]
 
 
